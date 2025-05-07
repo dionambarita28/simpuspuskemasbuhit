@@ -23,17 +23,17 @@ class Rekam_medis extends CI_Controller {
 		$this->load->view('rekam_medis_list',$data);
 		$this->load->view('inc/footer');
 	}
-	function rekam($no_pasien = null)
+	function rekam($no_ktp_pasien = null)
 	{	
-		if (!$no_pasien) {
+		if (!$no_ktp_pasien) {
 			redirect('pasien/list_registrasi');
 		}
 		$data['title'] = 'Rekam Medis';
 		$data['user'] = $this->user;
 		$data['list_klinik'] = $this->puskes->list_poli();
-		$data['pasien'] = $this->db->get_where('pasien', ['no_pasien' => $no_pasien])->row();
-		$data['dokter'] = $this->db->get_where('dokter', ['klinik' => 1])->result();
-		$data['pendaftaran'] = $this->db->get_where('pendaftaran', ['no_pasien' => $no_pasien])->row();
+		$data['pasien'] = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_ktp_pasien])->row();
+		$data['dokter'] = $this->db->get_where('dokter', ['poli_id' => 1])->result();
+		$data['pendaftaran'] = $this->db->get_where('pendaftaran', ['no_ktp_pasien' => $no_ktp_pasien])->row();
 		if (!$data['pasien']) {
 			redirect('pasien/list_registrasi');
 		}
@@ -60,13 +60,13 @@ class Rekam_medis extends CI_Controller {
 		$this->form_validation->set_message('required', '%s harus diisi!!');
 		$this->form_validation->set_message('numeric', '%s harus angka!!');
 		if ($this->form_validation->run() == false) {
-			$no_pasien = $this->input->post('no_pasien', true);
+			$no_ktp_pasien = $this->input->post('no_ktp_pasien', true);
 
 			$data['title'] = 'Rekam Medis';
 			$data['user'] = $this->user;
 			$data['list_klinik'] = $this->puskes->list_poli();
-			$data['pasien'] = $this->db->get_where('pasien', ['no_pasien' => $no_pasien])->row();
-			$data['pendaftaran'] = $this->db->get_where('pendaftaran', ['no_pasien' => $no_pasien])->row();
+			$data['pasien'] = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_ktp_pasien])->row();
+			$data['pendaftaran'] = $this->db->get_where('pendaftaran', ['no_ktp_pasien' => $no_ktp_pasien])->row();
 			if (!$data['pasien']) {
 				redirect('pasien/list_registrasi');
 			}
@@ -79,11 +79,11 @@ class Rekam_medis extends CI_Controller {
 			$data = [
 				'no_rm' => $this->input->post('no_rm', true),
 				'no_pendaftaran' => $this->input->post('no_pendaftaran', true),
-				'no_pasien' => $this->input->post('no_pasien', true),
+				'no_ktp_pasien' => $this->input->post('no_ktp_pasien', true),
 				'tgl_rekam' => $this->input->post('tgl_rekam', true),
 				'nama_pasien' => $this->input->post('nama_pasien', true),
-				'klinik_tujuan' => $this->input->post('klinik_tujuan', true),
-				'dokter_tujuan' => $this->input->post('dokter_tujuan')
+				'poli_id' => $this->input->post('klinik_tujuan', true),
+				'dokter_id' => $this->input->post('dokter_tujuan')
 			];
 
 			$this->db->insert('rekam_medis', $data);

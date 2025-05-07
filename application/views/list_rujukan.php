@@ -25,7 +25,7 @@
                             <thead class="bg-secondary">
                                 <tr class="text-white text-uppercase text-sm">
                                     <th>No Rm</th>
-                                    <th>No Pasien</th>
+                                    <th>No KTP Pasien</th>
                                     <th>Nama Pasien</th>
                                     <th>Dari</th>
                                     <th>Dokter</th>
@@ -37,18 +37,18 @@
                                    <?php foreach($rujuk_internal as $rujuk_i) : ?>
                                     <tr>
                                       <td><?= $rujuk_i['no_rm']; ?></td>
-                                      <td><?= $rujuk_i['no_pasien']; ?></td>
+                                      <td><?= $rujuk_i['no_ktp_pasien']; ?></td>
                                       <td><?= $rujuk_i['nama_pasien']; ?></td>
                                       <td>
                                         <?php foreach($klinik_list as $klinik) : ?>
-                                        <?php if ($rujuk_i['klinik_perujuk'] == $klinik['id']) {
+                                        <?php if ($rujuk_i['poli_id'] == $klinik['poli_id']) {
                                             echo $klinik['nama_klinik'];
                                         } ?>
                                         <?php endforeach ?>
                                         </td>
                                       <td>
                                         <?php foreach($list_dokter as $dokter) : ?>
-                                        <?php if ($rujuk_i['dokter_rujuk'] == $dokter['id']) {
+                                        <?php if ($rujuk_i['dokter_id'] == $dokter['dokter_id']) {
                                             echo $dokter['nama_dokter'];
                                         } ?>
                                         <?php endforeach ?>
@@ -105,7 +105,7 @@
                                       <td><?= $rujuk_i['nama_pasien']; ?></td>
                                       <td>
                                         <?php foreach($klinik_list as $klinik) : ?>
-                                        <?php if ($rujuk_i['klinik_perujuk'] == $klinik['id']) {
+                                        <?php if ($rujuk_i['poli_id'] == $klinik['poli_id']) {
                                             echo $klinik['nama_klinik'];
                                         } ?>
                                         <?php endforeach ?>
@@ -152,7 +152,7 @@
                                       <td>
                                         <?php foreach($pasien as $psn) : ?>
                                             <?php 
-                                            if ($rujuk_i['no_pasien'] == $psn['no_pasien']) {
+                                            if ($rujuk_i['no_ktp_pasien'] == $psn['no_ktp_pasien']) {
                                                 echo $psn['nama'];
                                             }
                                             ?>

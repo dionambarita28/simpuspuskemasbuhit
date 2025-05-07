@@ -20,7 +20,7 @@ class Pemeriksaan extends CI_Controller {
 		$data['title'] = 'Pemeriksaan';
 		$data['user'] = $this->user;
 		$dokter = $this->db->get_where('dokter', ['username' => $this->session->userdata('username')])->row_array();
-		$data['rekam_list'] = $this->db->get_where('rekam_medis', ['dokter_tujuan' => $dokter['id']])->result_array();;
+		$data['rekam_list'] = $this->db->get_where('rekam_medis', ['dokter_id' => $dokter['dokter_id']])->result_array();
 		$data['poli_list'] = $this->puskes->list_poli();
 		$data['list_dokter'] = $this->puskes->list_dokter();
 		$this->load->view('inc/header',$data);
@@ -32,11 +32,15 @@ class Pemeriksaan extends CI_Controller {
 		$data['title'] = 'Resep Obat';
 		$data['user'] = $this->user;
 		$dokter_id = $this->db->get_where('dokter', ['username' => $this->session->userdata('username')])->row();
-		$data['resep_list'] = $this->db->get_where('resep_obat', ['dokter_id' => $dokter_id->id])->result_array();
+error_reporting(0);
+		$data['resep_list'] = $this->db->get_where('resep_obat', ['dokter_id' => $dokter_id->dokter_id])->result_array();
+
 		$this->load->view('inc/header',$data);
 		$this->load->view('riwayat_resep',$data);
 		$this->load->view('inc/footer');
 	}
+
+
 	function periksa($no_rm = null)
 	{	
 		if (!$no_rm) {
@@ -62,7 +66,7 @@ class Pemeriksaan extends CI_Controller {
 		$data['user'] = $this->user;
 		$data['rekam_medis'] = $this->db->get_where('rekam_medis', ['no_rm' => $no_rm])->row();
 		$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
-		$data['dokter'] = $this->db->get_where('dokter', ['klinik' => 1])->result();
+		$data['dokter'] = $this->db->get_where('dokter', ['poli_id' => 1])->result();
 		$data['klinik_list'] = $this->puskes->list_poli();
 		if (!$data['rekam_medis'] || $data['rekam_medis']->status == 0) {
 			redirect('pemeriksaan');
@@ -79,7 +83,7 @@ class Pemeriksaan extends CI_Controller {
 		$data['title'] = 'Rujukan';
 		$data['user'] = $this->user;
 		$data['rekam_medis'] = $this->db->get_where('rekam_medis', ['no_rm' => $no_rm])->row();
-		$data['pasien'] = $this->db->get_where('pasien', ['no_pasien' => $data['rekam_medis']->no_pasien])->row();
+		$data['pasien'] = $this->db->get_where('pasien', ['no_ktp_pasien' => $data['rekam_medis']->no_ktp_pasien])->row();
 		$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
 		$data['klinik_list'] = $this->puskes->list_poli();
 		if (!$data['rekam_medis'] || $data['rekam_medis']->status == 0) {
@@ -139,7 +143,7 @@ class Pemeriksaan extends CI_Controller {
 				
 			} else {
 				$no_rm = $this->input->post('no_rm', true);
-				$obat = $this->db->get_where('obat', ['id' => $this->input->post('id_obat', true)])->row();
+				$obat = $this->db->get_where('obat', ['id_obat' => $this->input->post('id_obat', true)])->row();
 				if (!$obat) {
 					$this->session->set_flashdata('message', 
 						'<div class="alert alert-danger" role="alert">
@@ -156,7 +160,7 @@ class Pemeriksaan extends CI_Controller {
 					'id_rm' => $this->input->post('id_rm', true),
 					'dokter_id' => $this->input->post('dokter_id', true)
 				];
-				$stok = $this->db->get_where('obat', ['id' => $this->input->post('id_obat', true)])->row()->stok;
+				$stok = $this->db->get_where('obat', ['id_obat' => $this->input->post('id_obat', true)])->row()->stok;
 				if ($this->input->post('jumlah') > $stok) {
 					$this->session->set_flashdata('message', 
 						'<div class="alert alert-danger" role="alert">
@@ -207,7 +211,7 @@ class Pemeriksaan extends CI_Controller {
 					</div>'
 				);
 				$this->db->set('stok', $stok - $this->input->post('jumlah'), FALSE);
-				$this->db->where('id', $this->input->post('id_obat', true));
+				$this->db->where('id_obat', $this->input->post('id_obat', true));
 				$this->db->update('obat');
 				redirect('pemeriksaan/resep/'.$no_rm);
 			}
@@ -269,7 +273,7 @@ class Pemeriksaan extends CI_Controller {
 			$data['user'] = $this->user;
 			$data['rekam_medis'] = $this->db->get_where('rekam_medis', ['no_rm' => $no_rm])->row();
 			$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
-			$data['dokter'] = $this->db->get_where('dokter', ['klinik' => 1])->result();
+			$data['dokter'] = $this->db->get_where('dokter', ['poli_id' => 1])->result();
 			$data['klinik_list'] = $this->puskes->list_poli();
 			if (!$data['rekam_medis'] || $data['rekam_medis']->status == 0) {
 				redirect('pemeriksaan');
@@ -282,10 +286,10 @@ class Pemeriksaan extends CI_Controller {
 
 			$data = [
 				'no_rm' => $this->input->post('no_rm', true),
-				'no_pasien' => $this->input->post('no_pasien', true),
+				'no_ktp_pasien' => $this->input->post('no_ktp_pasien', true),
 				'nama_pasien' => $this->input->post('nama_pasien', true),
-				'klinik_perujuk' => $this->input->post('klinik_perujuk', true),
-				'dokter_perujuk' => $this->input->post('dokter_perujuk', true),
+				'poli_id' => $this->input->post('klinik_perujuk', true),
+				'dokter_id' => $this->input->post('dokter_perujuk', true),
 				'klinik_rujuk' => $this->input->post('klinik_rujuk', true),
 				'dokter_rujuk' => $this->input->post('dokter_rujuk', true),
 				'status' => 0,
@@ -304,8 +308,8 @@ class Pemeriksaan extends CI_Controller {
 	{
 		
 		// form rules
-		$this->form_validation->set_rules('dokter_tujuan', 'Nama Dokter Rujukan', 'required');
-		$this->form_validation->set_rules('rs_tujuan', 'Rumah Sakit Rujukan', 'required');
+		$this->form_validation->set_rules('dokter_tujuan', 'Nama Dokter Tujuan', 'required');
+		$this->form_validation->set_rules('rs_tujuan', 'Rumah Sakit Tujuan', 'required');
 		$this->form_validation->set_message('required', '%s harus diisi!!');
 		if ($this->form_validation->run() == false) {
 			$no_rm = $this->input->post('no_rm', true);
@@ -315,7 +319,7 @@ class Pemeriksaan extends CI_Controller {
 			$data['title'] = 'Rujukan';
 			$data['user'] = $this->user;
 			$data['rekam_medis'] = $this->db->get_where('rekam_medis', ['no_rm' => $no_rm])->row();
-			$data['pasien'] = $this->db->get_where('pasien', ['no_pasien' => $data['rekam_medis']->no_pasien])->row();
+			$data['pasien'] = $this->db->get_where('pasien', ['no_ktp_pasien' => $data['rekam_medis']->no_ktp_pasien])->row();
 			$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
 			$data['klinik_list'] = $this->puskes->list_poli();
 			if (!$data['rekam_medis'] || $data['rekam_medis']->status == 0) {
@@ -329,9 +333,9 @@ class Pemeriksaan extends CI_Controller {
 
 			$data = [
 				'no_rm' => $this->input->post('no_rm', true),
-				'no_pasien' => $this->input->post('no_pasien', true),
-				'klinik_perujuk' => $this->input->post('klinik_perujuk', true),
-				'dokter_perujuk' => $this->input->post('dokter_perujuk', true),
+				'no_ktp_pasien' => $this->input->post('no_ktp_pasien', true),
+				'poli_id' => $this->input->post('klinik_perujuk', true),
+				'dokter_id' => $this->input->post('dokter_perujuk', true),
 				'rs_tujuan' => $this->input->post('rs_tujuan', true),
 				'dokter_tujuan' => $this->input->post('dokter_tujuan', true)
 			];
@@ -350,11 +354,11 @@ class Pemeriksaan extends CI_Controller {
 			redirect('pemeriksaan');
 		}
 		$rekam_medis = $this->db->get_where('rekam_medis', ['id' => $id_rm])->row();
-		$no_pasien = $rekam_medis->no_pasien;
+		$no_ktp_pasien = $rekam_medis->no_ktp_pasien;
 		$data = [
 				'id_rm' => $id_rm,
 				'no_rm' => $rekam_medis->no_rm,
-				'no_pasien' => $no_pasien,
+				'no_ktp_pasien' => $no_ktp_pasien,
 				'tgl_labor' => date('d-m-Y'),
 				'no_labor' => date('Ymd')+$rekam_medis->no_rm
 			];

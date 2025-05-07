@@ -12,7 +12,7 @@
                             <tr>
                                 <td>Diagnosa Sebelumnya</td>
                                 <td>:</td>
-                                <td><?=$pemeriksaan->diagnosa_penyakit;?></td>
+                                <td><?= $pemeriksaan['diagnosa_penyakit'];?></td>
                             </tr>
                         </table>
                             <form method="post" action="<?= base_url('rujukan/addDiagnosa'); ?>">

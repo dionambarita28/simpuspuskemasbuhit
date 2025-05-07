@@ -35,6 +35,7 @@ class Obat extends CI_Controller {
 		$this->load->view('pengambilan_resep',$data);
 		$this->load->view('inc/footer');
 	}
+	
 	function addObat()
 	{	
 		$data['title'] = 'Obat';
@@ -66,8 +67,8 @@ class Obat extends CI_Controller {
 
 			$data = [
 				'nama_obat' => $this->input->post('nama', true),
-				'kategori' => $this->input->post('kategori-obat', true),
-				'satuan' => $this->input->post('satuan-obat', true),
+				'id_kategori_obat' => $this->input->post('id_kategori_obat', true),
+				'id_satuan' => $this->input->post('id_satuan', true),
 				'keterangan' => $this->input->post('keterangan')
 			];
 
@@ -81,7 +82,7 @@ class Obat extends CI_Controller {
 
 	function delete($id)
 	{
-		$this->db->delete('obat', ['id' => $id]);
+		$this->db->delete('obat', ['id_obat' => $id]);
 		$this->session->set_flashdata('message', 
 			'<div class="alert alert-success" role="alert">Obat berhasil dihapus</div>'
 		);
@@ -96,16 +97,17 @@ class Obat extends CI_Controller {
 		);
 		redirect('obat/pengambilan_resep');
 	}
+
 	function tolak_resep($id){
 		$id_obat = $this->db->get_where('resep_obat', ['id' => $id])->row()->id_obat;
 		$jumlah = $this->db->get_where('resep_obat', ['id' => $id])->row()->jumlah;
-		$stok = $this->db->get_where('obat', ['id' => $id_obat])->row()->stok;
+		$stok = $this->db->get_where('obat', ['id_obat' => $id_obat])->row()->stok;
 		$this->db->set('status',3, FALSE);
 		$this->db->where('id', $id);
 		$this->db->update('resep_obat');
 
 		$this->db->set('stok',$stok+$jumlah, FALSE);
-		$this->db->where('id', $id_obat);
+		$this->db->where('id_obat', $id_obat);
 		$this->db->update('obat');
 		
 		$this->session->set_flashdata('message', 
@@ -113,6 +115,7 @@ class Obat extends CI_Controller {
 		);
 		redirect('obat/pengambilan_resep');
 	}
+
 	function update_obat($id = null){
 		if (!$id){
 			redirect('obat');
@@ -121,31 +124,32 @@ class Obat extends CI_Controller {
 		$data['user'] = $this->user;
 		$data['list_kategori'] = $this->puskes->list_kategori_obat();
 		$data['list_satuan_obat'] = $this->puskes->list_satuan_obat();
-		$data['obat'] = $this->db->get_where('obat', ['id' => $id])->row_array();
+		$data['obat'] = $this->db->get_where('obat', ['id_obat' => $id])->row_array();
 		$this->load->view('inc/header',$data);
 		$this->load->view('edit/edit_obat',$data);
 		$this->load->view('inc/footer');
 	}
+
 	function editProses(){
-		$this->form_validation->set_rules('nama', 'Nama Obat', 'required');
+		$this->form_validation->set_rules('nama_obat', 'Nama Obat', 'required');
 		$this->form_validation->set_rules('stok', 'Stok Obat', 'integer|numeric');
 		$this->form_validation->set_message('required', '%s harus diisi!!');
 		$this->form_validation->set_message('required', '%s harus diisi!!');
 		$this->form_validation->set_message('numeric', '%s harus angka!!');
 		if ($this->form_validation->run() == false) {
-			$id = $this->input->post('id', true);
+			$id = $this->input->post('id_obat', true);
 			$data['title'] = 'Obat';
 			$data['user'] = $this->user;
 			$data['list_kategori'] = $this->puskes->list_kategori_obat();
 			$data['list_satuan_obat'] = $this->puskes->list_satuan_obat();
-			$data['obat'] = $this->db->get_where('obat', ['id' => $id])->row_array();
+			$data['obat'] = $this->db->get_where('obat', ['id_obat' => $id])->row_array();
 			$this->load->view('inc/header',$data);
 			$this->load->view('edit/edit_obat',$data);
 			$this->load->view('inc/footer');
 
 		} else {
-			$id = $this->input->post('id', true);
-			$stok = $this->db->get_where('obat', ['id' => $id])->row()->stok;
+			$id = $this->input->post('id_obat', true);
+			$stok = $this->db->get_where('obat', ['id_obat' => $id])->row_array();
 			if ($this->input->post('stok', true) > $stok) {
 				$this->session->set_flashdata('message', 
 					'<div class="alert alert-danger" role="alert">Silahkan Menambah Stok Di Pegadaan Obat!!</div>'
@@ -153,18 +157,33 @@ class Obat extends CI_Controller {
 				redirect('obat/update_obat/'.$id);
 			}
 			$data = [
-				'nama_obat' => $this->input->post('nama', true),
-				'kategori' => $this->input->post('kategori-obat', true),
-				'satuan' => $this->input->post('satuan-obat', true),
+				'nama_obat' => $this->input->post('nama_obat', true),
+				'id_kategori_obat' => $this->input->post('id_kategori_obat', true),
+				'id_satuan' => $this->input->post('id_satuan', true),
 				'keterangan' => $this->input->post('keterangan'),
 				'stok' => $this->input->post('stok',true)
 			];
 
-			$this->db->where('id', $id);
+			$this->db->where('id_obat', $id);
 			$this->db->update('obat', $data);
 			$this->session->set_flashdata('message', 
 				'<div class="alert alert-success" role="alert">Data Obat berhasil diubah</div>'
 			);
+			// $id = ['id_obat' => $this->input->post('id_obat', true)];
+			// //var_dump($id);die();
+			// $data = [
+			// 	'nama_obat' => $this->input->post('nama_obat', true),
+			// 	'id_kategori_obat' => $this->input->post('id_kategori_obat', true),
+			// 	'id_satuan' => $this->input->post('id_satuan', true),
+			// 	'keterangan' => $this->input->post('keterangan'),
+			// 	'stok' => $this->input->post('stok',true)
+			// ];
+			// //var_dump($data);die();
+			// $this->db->update('obat', $data, $id);
+			// $this->session->set_flashdata('message', 
+			// 	'<div class="alert alert-success" role="alert">Data Obat berhasil diubah</div>'
+			// );
+
 			redirect('obat');
 		}
 	}

@@ -13,8 +13,8 @@
                             <form method="post" action="<?= base_url('obat/editProses'); ?>">
                                 <div class="form-group">
                                     <label for="supplier" class="col-form-label">Nama Obat</label>
-                                    <input class="form-control inp" type="text" value="<?=$obat['nama_obat'];?>" id="nama" name="nama">
-                                    <input type="hidden" name="id" value="<?=$obat['id'];?>">
+                                    <input class="form-control inp" type="text" value="<?=$obat['nama_obat'];?>" id="nama" name="nama_obat">
+                                    <input type="hidden" name="id_obat" value="<?=$obat['id_obat'];?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="supplier" class="col-form-label">Stok Obat</label>
@@ -22,12 +22,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Kategori Obat</label>
-                                    <select class="form-control inp" id="kategori-obat" name="kategori-obat">
+                                    <select class="form-control inp" id="kategori-obat" name="id_kategori_obat">
                                         <?php foreach($list_kategori as $list_k) : ?>
-                                        <?php if ($list_k['id'] == $obat['kategori']) {
-                                           echo '<option value="'.$list_k['id'].'" selected>'.$list_k['kategori_obat'].'</option>';
+                                        <?php if ($list_k['id_kategori_obat'] == $obat['id_kategori_obat']) {
+                                           echo '<option value="'.$list_k['id_kategori_obat'].'" selected>'.$list_k['kategori_obat'].'</option>';
                                         }else{
-                                            echo '<option value="'.$list_k['id'].'">'.$list_k['kategori_obat'].'</option>';
+                                            echo '<option value="'.$list_k['id_kategori_obat'].'">'.$list_k['kategori_obat'].'</option>';
                                         } ?>
                                         
                                         <?php endforeach ?>
@@ -35,12 +35,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Satuan Obat</label>
-                                    <select class="form-control inp" id="satuan-obat"name="satuan-obat">
+                                    <select class="form-control inp" id="satuan-obat"name="id_satuan">
                                         <?php foreach($list_satuan_obat as $list_s) : ?>
-                                        <?php if ($list_s['id'] == $obat['satuan']) {
-                                           echo '<option value="'.$nama_satuanlist_s['id'].'" selected>'.$list_s['nama_satuan'].'</option>';
+                                        <?php if($list_s['id_satuan'] == $obat['id_satuan']) {
+                                           echo '<option value="'.$list_s['id_satuan'].'" selected>'.$list_s['nama_satuan'].'</option>';
                                         }else{
-                                            echo '<option value="'.$list_s['id'].'">'.$list_s['nama_satuan'].'</option>';
+                                            echo '<option value="'.$list_s['id_satuan'].'">'.$list_s['nama_satuan'].'</option>';
                                         } ?>
                                         <?php endforeach ?>
                                     </select>

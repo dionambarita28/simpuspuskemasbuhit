@@ -54,8 +54,8 @@ class Kategori_obat extends CI_Controller {
 	}
 	function delete($id)
 	{
-		$this->db->delete('kategori_obat', ['id' => $id]);
-		$this->db->delete('obat', ['kategori' => $id]);
+		$this->db->delete('kategori_obat', ['id_kategori_obat' => $id]);
+		$this->db->delete('obat', ['id_kategori_obat' => $id]);
 		$this->session->set_flashdata('message', 
 			'<div class="alert alert-success" role="alert">Kategori obat beserta isinya berhasil dihapus</div>'
 		);
@@ -73,12 +73,12 @@ class Kategori_obat extends CI_Controller {
 			$this->load->view('inc/footer');
 
 		} else {
-			$id = $this->input->post('id', true);
+			$id = $this->input->post('id_kategori_obat', true);
 			$data = [
 				'kategori_obat' => $this->input->post('kategori_obat', true)
 			];
 
-			$this->db->where('id', $id);
+			$this->db->where('id_kategori_obat', $id);
 			$this->db->update('kategori_obat', $data);
 			$this->session->set_flashdata('message', 
 				'<div class="alert alert-success" role="alert">Kategori Obat berhasil diubah</div>'

@@ -32,7 +32,7 @@ class Laporan extends CI_Controller {
                 $pdf = new FPDF('P', 'mm','A4');
 
                 $pdf->AddPage();
-                $pasien = $this->db->get_where('pasien', ['no_pasien' => $no_rm])->row();
+                $pasien = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_rm])->row();
                 if (!$pasien) {
                         redirect('pasien');
                 }
@@ -47,9 +47,9 @@ class Laporan extends CI_Controller {
                 $pdf->Cell(30,7,'Nama',"L T",0);
                 $pdf->Cell(8,7,':',"T",0,'C');
                 $pdf->Cell(70,7,$pasien->nama,"R T",1);
-                $pdf->Cell(30,7,'No Pasien',"L",0);
+                $pdf->Cell(30,7,'No KTP',"L",0);
                 $pdf->Cell(8,7,':',0,0,'C');
-                $pdf->Cell(70,7,$pasien->no_pasien,"R",1);
+                $pdf->Cell(70,7,$pasien->no_ktp_pasien,"R",1);
                 $pdf->Cell(30,7,'Tanggal Lahir',"L",0);
                 $pdf->Cell(8,7,':',0,0,'C');
                 $pdf->Cell(70,7,$pasien->tgl_lahir,"R",1);

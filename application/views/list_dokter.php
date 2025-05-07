@@ -40,15 +40,15 @@
                                       <td>
                                       <?php foreach($list_klinik as $klinik) : ?>
 
-                                      <?php if ($dokter['klinik'] == $klinik['id']) {
+                                      <?php if ($dokter['poli_id'] == $klinik['poli_id']) {
                                           echo $klinik['nama_klinik'];
                                         } 
                                       ?>
                                       <?php endforeach ?>
                                       </td>
                                         <td class="text-center">
-                                            <button class="btn btn-success btn-xs modal-edit-dokter" data-target="#modal-edit-dokter" data-toggle="modal" data-nama="<?=$dokter['nama_dokter']; ?>" data-id="<?=$dokter['id']; ?>"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="petugas/delete_dokter/<?=$dokter['id']; ?>"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-success btn-xs modal-edit-dokter" data-target="#modal-edit-dokter" data-toggle="modal" data-nama="<?=$dokter['nama_dokter']; ?>" data-id="<?=$dokter['dokter_id']; ?>"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="petugas/delete_dokter/<?=$dokter['dokter_id']; ?>"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     <?php $i++; endforeach ?>
@@ -98,7 +98,7 @@
                     <label class="col-form-label">Klinik Posisi:</label>
                     <select class="form-control inp" id="level" name="klinik">
                         <?php foreach($list_klinik as $klinik) : ?>
-                            <option value="<?= $klinik['id'];?>"><?= $klinik['nama_klinik'];?></option>
+                            <option value="<?= $klinik['poli_id'];?>"><?= $klinik['nama_klinik'];?></option>
                         <?php endforeach ?>
                     </select>
                 </div>

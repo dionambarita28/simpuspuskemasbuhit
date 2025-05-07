@@ -11,8 +11,8 @@
                             <form method="post" action="<?= base_url('rekam_medis/addProses'); ?>">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="supplier" class="col-form-label">No Pasien</label>
-                                        <input class="form-control inp" type="text" value="<?=$pasien->no_pasien;?>" id="nama" name="no_pasien" readonly>
+                                        <label for="supplier" class="col-form-label">No KTP</label>
+                                        <input class="form-control inp" type="text" value="<?=$pasien->no_ktp_pasien;?>" id="nama" name="no_ktp_pasien" readonly>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="supplier" class="col-form-label">No Pendaftaran</label>
@@ -36,7 +36,7 @@
                                     <label class="col-form-label">Klinik Tujuan</label>
                                     <select class="form-control inp" id="klinik" name="klinik_tujuan">
                                         <?php foreach($list_klinik as $list_p) : ?>
-                                        <option value="<?= $list_p['id']; ?>"><?= $list_p['nama_klinik']; ?></option>
+                                        <option value="<?= $list_p['poli_id']; ?>"><?= $list_p['nama_klinik']; ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -44,7 +44,7 @@
                                     <label class="col-form-label">Dokter Tujuan</label>
                                     <select class="form-control inp" id="dokter" name="dokter_tujuan">
                                         <?php foreach($dokter as $dkter) : ?>
-                                        <option value="<?=$dkter->id;?>"><?=$dkter->nama_dokter;?></option>
+                                        <option value="<?=$dkter->dokter_id;?>"><?=$dkter->nama_dokter;?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

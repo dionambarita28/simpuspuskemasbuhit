@@ -40,13 +40,13 @@
                                       <td><?= $rekam['nama_pasien']; ?></td>
                                       <td>
                                         <?php foreach($poli_list as $list_p) : ?>
-                                        <?php if ($rekam['klinik_tujuan'] == $list_p['id']) {
+                                        <?php if ($rekam['poli_id'] == $list_p['poli_id']) {
                                             echo $list_p['nama_klinik'];
                                         } ?>
                                         <?php endforeach ?>
                                       </td>
                                       <td><?php foreach($list_dokter as $list_d) : ?>
-                                        <?php if ($rekam['dokter_tujuan'] == $list_d['id']) {
+                                        <?php if ($rekam['dokter_id'] == $list_d['dokter_id']) {
                                             echo $list_d['nama_dokter'];
                                         } ?>
                                         <?php endforeach ?></td>

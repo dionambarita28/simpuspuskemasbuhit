@@ -15,18 +15,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Kategori Obat</label>
-                                    <select class="form-control inp" id="kategori-obat" name="kategori-obat">
-                                        <?php foreach($list_kategori as $list_k) : ?>
-                                        <option value="<?= $list_k['id']; ?>"><?= $list_k['kategori_obat']; ?></option>
-                                        <?php endforeach ?>
+                                    <select class="form-control inp" id="id_kategori_obat" name="id_kategori_obat">
+                                        <option value="NULL">-- Pilih Kategori Obat --</option>
+                                        <?php foreach($list_kategori as $list_k) { ?>
+                                        <option value="<?= $list_k['id_kategori_obat']; ?>"><?= $list_k['kategori_obat']; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label">Satuan Obat</label>
-                                    <select class="form-control inp" id="satuan-obat"name="satuan-obat">
-                                        <?php foreach($list_satuan_obat as $list_s) : ?>
-                                        <option value="<?= $list_s['id']; ?>"><?= $list_s['nama_satuan']; ?></option>
-                                        <?php endforeach ?>
+                                    <select class="form-control inp" id="id_satuan"name="id_satuan">
+                                        <option value="NULL">-- Pilih Satuan Obat --</option>
+                                        <?php foreach($list_satuan_obat as $list_s) { ?>
+                                        <option value="<?= $list_s['id_satuan']; ?>"><?= $list_s['nama_satuan']; ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">

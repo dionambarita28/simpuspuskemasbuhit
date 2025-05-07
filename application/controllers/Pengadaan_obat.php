@@ -70,7 +70,7 @@ class Pengadaan_obat extends CI_Controller {
 				'expired' => $this->input->post('expired')
 			];
 
-			$this->db->where('id', $this->input->post('obatid',true));
+			$this->db->where('id_obat', $this->input->post('obatid',true));
 			$this->db->update('obat',$data2);
 
 			$this->session->set_flashdata('message', 

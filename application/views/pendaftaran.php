@@ -11,8 +11,8 @@
                             <form method="post" action="<?= base_url('pasien/addRegistrasi'); ?>" class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="supplier" class="col-form-label">No Pasien</label>
-                                        <input class="form-control inp" type="text" value="<?=$pasien->no_pasien;?>" id="nama" name="no_pasien" readonly>
+                                        <label for="supplier" class="col-form-label">No KTP</label>
+                                        <input class="form-control inp" type="text" value="<?=$pasien->no_ktp_pasien;?>" id="nama" name="no_ktp_pasien" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label">Tanggal Berobat</label>

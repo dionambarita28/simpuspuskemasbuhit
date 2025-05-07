@@ -9,7 +9,7 @@
                     </div>
                     <div class="clearfix col-md-6">
                         <div class="pull-right">
-                            <a href="<?= base_url('pasien/addPasien'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Pasien</a>
+                            <a href="<?= base_url('pasien/add_Pasien'); ?>" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Pasien</a>
                             <a href="<?= base_url('cetak/laporan_pasien'); ?>" class="btn btn-warning"><i class="fa fa-file-text"></i> Laporan Pasien</a>
                         </div>
                     </div>
@@ -24,29 +24,25 @@
                     		<table id="table-obat" class="table table-striped table-hover" style="width:100%">
                             <thead class="bg-secondary">
                                 <tr class="text-uppercase text-sm text-white">
-                                    <th scope="col" class="text-center">No Pasien</th>
-                                    <th scope="col">Nama</th>
+                                    <th scope="col" class="text-center">No KTP Pasien</th>
+                                    <th scope="col">Nama Lengkap</th>
                                     <th scope="col">Kelamin</th>
                                     <th scope="col">Tgl Lahir</th>
-                                    <th scope="col">Tinggi</th>
-                                    <th scope="col">Berat</th>
                                     <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <?php foreach($pasien_list as $pasien) : ?>
                                     <tr>
-                                      <td scope="row" class="text-center"><strong><?= $pasien['no_pasien']; ?></strong></td>
+                                      <td scope="row" class="text-center"><strong><?= $pasien['no_ktp_pasien']; ?></strong></td>
                                       <td><?= $pasien['nama']; ?></td>
                                       <td><?= $pasien['kelamin']; ?></td>
                                       <td><?= $pasien['tgl_lahir']; ?></td>
-                                      <td><?= $pasien['tinggi']; ?> cm</td>
-                                      <td><?= $pasien['berat']; ?> kg</td>
                                         <td class="text-center">
-                                            <a href="<?= base_url('pasien/editPasien/').$pasien['no_pasien'];?>" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="<?= base_url('pasien/editPasien/').$pasien['no_ktp_pasien'];?>" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
                                             <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="pasien/delete_pasien/<?=$pasien['id']; ?>"><i class="fa fa-trash"></i></button>
-                                            <a href="<?= base_url('pasien/daftar/').$pasien['no_pasien'];?>" class="btn btn-warning btn-xs">Daftar</a>
-                                            <a href="<?= base_url('laporan/cetak_kartu/').$pasien['no_pasien'];?>" class="btn btn-info btn-xs">Kartu</a>
+                                            <a href="<?= base_url('pasien/daftar/').$pasien['no_ktp_pasien'];?>" class="btn btn-warning btn-xs">Daftar</a>
+                                            <a href="<?= base_url('laporan/cetak_kartu/').$pasien['no_ktp_pasien'];?>" class="btn btn-info btn-xs">Kartu</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

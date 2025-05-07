@@ -26,7 +26,7 @@
                                 <tr class="text-white text-uppercase text-sm">
                                     <th>No Rm</th>
                                     <th>No Labor</th>
-                                    <th>No Pasien</th>
+                                    <th>No KTP Pasien</th>
                                     <th>Tanggal</th>
                                     <th>Nama Pasien</th>
                                     <th>Status</th>
@@ -38,12 +38,12 @@
                                     <tr>
                                       <td><?= $labor['no_rm']; ?></td>
                                       <td><?= $labor['no_labor']; ?></td>
-                                      <td><?= $labor['no_pasien']; ?></td>
+                                      <td><?= $labor['no_ktp_pasien']; ?></td>
                                       <td><?= $labor['tgl_labor']; ?></td>
                                       <td>
                                         <?php foreach($list_pasien as $pasien) : ?>
                                             <?php 
-                                                if ($labor['no_pasien'] == $pasien['no_pasien']) {
+                                                if ($labor['no_ktp_pasien'] == $pasien['no_ktp_pasien']) {
                                                     echo $pasien['nama'];
                                                 }
                                             ?>

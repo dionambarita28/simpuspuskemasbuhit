@@ -12,10 +12,10 @@
                                 <div class="form-group">
                                     <label for="supplier" class="col-form-label">No Rekam Medis</label>
                                     <input class="form-control inp" type="text" value="<?=$rekam_medis->no_rm;?>" id="nama" name="no_rm" readonly>
-                                    <input type="hidden" name="no_pasien" value="<?=$rekam_medis->no_pasien;?>">
+                                    <input type="hidden" name="no_ktp_pasien" value="<?=$rekam_medis->no_ktp_pasien;?>">
                                     <input type="hidden" name="nama_pasien" value="<?=$rekam_medis->nama_pasien;?>">
-                                    <input type="hidden" name="klinik_perujuk" value="<?=$rekam_medis->klinik_tujuan;?>">
-                                    <input type="hidden" name="dokter_perujuk" value="<?=$rekam_medis->dokter_tujuan;?>">
+                                    <input type="hidden" name="klinik_perujuk" value="<?=$rekam_medis->poli_id;?>">
+                                    <input type="hidden" name="dokter_perujuk" value="<?=$rekam_medis->dokter_id;?>">
                                 </div> 
                                 <div class="form-group">
                                     <label class="col-form-label">Rumah Sakit Tujuan</label>

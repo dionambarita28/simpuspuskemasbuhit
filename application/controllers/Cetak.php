@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -33,10 +34,11 @@ class Cetak extends CI_Controller
 
         $this->pdf->SetFont('Arial','B',10);
         $this->pdf->Cell(8,7,'No',1,0,'C');
-        $this->pdf->Cell(35,7,'No Pasien',1,0,'C');
-        $this->pdf->Cell(70,7,'Nama Pasien',1,0,'C');
+        $this->pdf->Cell(20,7,'No Daftar',1,0,'C');
+        $this->pdf->Cell(40,7,'No KTP',1,0,'C');
+        $this->pdf->Cell(65,7,'Nama Pasien',1,0,'C');
         $this->pdf->Cell(25,7,'Tgl Daftar',1,0,'C');
-        $this->pdf->Cell(0,7,'Jenis Pasien',1,1,'C');
+        $this->pdf->Cell(0,7,'Jenis',1,1,'C');
 
         $this->pdf->SetFont('Arial','',10);
         if ($this->input->post('seluruh')) {
@@ -45,8 +47,9 @@ class Cetak extends CI_Controller
             $no=1;
             foreach ($pendaftaran as $data){
                 $this->pdf->Cell(8,7,$no,1,0,'C');
-                $this->pdf->Cell(35,7,$data->no_pasien,1,0);
-                $this->pdf->Cell(70,7,$data->nama_pasien,1,0);
+                $this->pdf->Cell(20,7,$data->no_pendaftaran,1,0);
+                $this->pdf->Cell(40,7,$data->no_ktp_pasien,1,0);
+                $this->pdf->Cell(65,7,$data->nama_pasien,1,0);
                 $this->pdf->Cell(25,7,$data->tgl_berobat,1,0);
                 $this->pdf->Cell(0,7,$data->jenis_pasien,1,1);
                 $no++;
@@ -61,7 +64,7 @@ class Cetak extends CI_Controller
                 $no=1;
                 foreach ($pendaftaran as $data){
                     $this->pdf->Cell(8,7,$no,1,0,'C');
-                    $this->pdf->Cell(35,7,$data->no_pasien,1,0);
+                    $this->pdf->Cell(35,7,$data->no_ktp_pasien,1,0);
                     $this->pdf->Cell(70,7,$data->nama_pasien,1,0);
                     $this->pdf->Cell(25,7,$data->tgl_berobat,1,0);
                     $this->pdf->Cell(0,7,$data->jenis_pasien,1,1);
@@ -86,11 +89,11 @@ class Cetak extends CI_Controller
 
         $this->pdf->SetFont('Arial','B',8);
         $this->pdf->Cell(8,7,'No',1,0,'C');
-        $this->pdf->Cell(20,7,'No Pasien',1,0,'C');
+        $this->pdf->Cell(40,7,'No KTP',1,0,'C');
         $this->pdf->Cell(60,7,'Nama Pasien',1,0,'C');
-        $this->pdf->Cell(45,7,'No Ktp',1,0,'C');
+        $this->pdf->Cell(30,7,'No Hp',1,0,'C');
         $this->pdf->Cell(15,7,'Kelamin',1,0,'C');
-        $this->pdf->Cell(0,7,'Tgl Lahir',1,1,'C');
+        $this->pdf->Cell(20,7,'Tgl Lahir',1,1,'C');
 
         $this->pdf->SetFont('Arial','',8);
         $this->db->order_by("id", "DESC");
@@ -98,15 +101,17 @@ class Cetak extends CI_Controller
         $no=1;
         foreach ($pasien as $data){
             $this->pdf->Cell(8,7,$no,1,0,'C');
-            $this->pdf->Cell(20,7,$data->no_pasien,1,0);
+            $this->pdf->Cell(40,7,$data->no_ktp_pasien,1,0);
             $this->pdf->Cell(60,7,$data->nama,1,0);
-            $this->pdf->Cell(45,7,$data->no_ktp,1,0);
+            $this->pdf->Cell(30,7,$data->no_hp,1,0);
             $this->pdf->Cell(15,7,$data->kelamin,1,0);
-            $this->pdf->Cell(0,7,$data->tgl_lahir,1,1);
+            $this->pdf->Cell(20,7,$data->tgl_lahir,1,1);
             $no++;
         }
         $this->pdf->Output( 'laporan_pasien.pdf' , 'I' );
     }
+
+    
     function info_rm($id = null)
     {
         if (!$id) {
@@ -116,11 +121,14 @@ class Cetak extends CI_Controller
         if (!$rekam_medis) {
             redirect('dashboard');
         }
-        $dokter_tujuan = $this->db->get_where('dokter', ['id' => $rekam_medis->dokter_tujuan])->row()->nama_dokter;
+        $dokter_tujuan = $this->db->get_where('dokter', ['dokter_id' => $rekam_medis->dokter_id])->row()->nama_dokter;
         $resep_obat = $this->db->get_where('resep_obat', ['id_rm' => $id])->result();
         $no_rm = $rekam_medis->no_rm;
-        $no_pasien = $rekam_medis->no_pasien;
-        $pasien = $this->db->get_where('pasien', ['no_pasien' => $no_pasien])->row();
+        $no_ktp_pasien = $rekam_medis->no_ktp_pasien;
+        $pasien = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_ktp_pasien])->row();
+        if (!$pasien) {
+            redirect('dashboard');
+        }
         $lab = $this->db->get_where('laboratorium', ['no_rm' => $no_rm])->row();
         $pemeriksaan = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
         $rujuk_external = $this->db->get_where('rujuk_external', ['no_rm' => $no_rm])->num_rows();
@@ -167,10 +175,7 @@ class Cetak extends CI_Controller
         $this->pdf->Cell(45,7,$pasien->nama,0,1);
         $this->pdf->Cell(35,7,"No KK",0,0);
         $this->pdf->Cell(6,7,":",0,0);
-        $this->pdf->Cell(45,7,$pasien->no_ktp,0,1);
-        $this->pdf->Cell(35,7,"Pekerjaan",0,0);
-        $this->pdf->Cell(6,7,":",0,0);
-        $this->pdf->Cell(45,7,$pasien->pekerjaan,0,1);
+        $this->pdf->Cell(45,7,$pasien->no_ktp_pasien,0,1);
         $this->pdf->Cell(35,7,"Alamat",0,0);
         $this->pdf->Cell(6,7,":",0,0);
         $this->pdf->MultiCell(45,7,$pasien->alamat,0,1);
@@ -230,16 +235,23 @@ class Cetak extends CI_Controller
         }
         $this->pdf->Output( 'rekam_medis'.$no_rm.'.pdf' , 'I' );
     }
-    function riwayat($no_pasien = null)
+
+
+// error cetak (PR)
+    function riwayat($no_ktp_pasien = null)
     {
-        if (!$no_pasien) {
+        error_reporting(0);
+        if (!$no_ktp_pasien) {
+            error_reporting(0);
             redirect('rekam_medis/riwayat_rekam');
         }
-        $rekam_medis = $this->db->get_where('rekam_medis', ['no_pasien' => $no_pasien])->result();
-        $rmr = $this->db->get_where('rekam_medis', ['no_pasien' => $no_pasien])->num_rows();
+        // $rekam_medis = $this->db->get_where('rekam_medis', ['no_ktp_pasien' => $no_ktp_pasien])->result();
+        $rekam_medis = $this->puskes->riwayat($no_ktp_pasien)->result();
+        //var_dump($rekam_medis);die();
+        $rmr = $this->db->get_where('rekam_medis', ['no_ktp_pasien' => $no_ktp_pasien])->num_rows();
         $klinik = $this->puskes->list_poli();
         $dokter = $this->puskes->list_dokter();
-        $pasien = $this->db->get_where('pasien', ['no_pasien' => $no_pasien])->row();
+        $pasien = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_ktp_pasien])->row();
        
 
         $this->pdf = new Pdf();
@@ -258,10 +270,10 @@ class Cetak extends CI_Controller
         $this->pdf->Cell(45,7,$pasien->nama,0,1);
         $this->pdf->Cell(35,7,"No KK",0,0);
         $this->pdf->Cell(6,7,":",0,0);
-        $this->pdf->Cell(45,7,$pasien->no_ktp,0,1);
-        $this->pdf->Cell(35,7,"Pekerjaan",0,0);
+        $this->pdf->Cell(45,7,$pasien->no_ktp_pasien,0,1);
+        $this->pdf->Cell(35,7,"Jenis Pasien",0,0);
         $this->pdf->Cell(6,7,":",0,0);
-        $this->pdf->Cell(45,7,$pasien->pekerjaan,0,1);
+        $this->pdf->Cell(45,7,$pasien->jenis_pasien,0,1);
         $this->pdf->Cell(35,7,"Alamat",0,0);
         $this->pdf->Cell(6,7,":",0,0);
         $this->pdf->MultiCell(45,7,$pasien->alamat,0,1);
@@ -276,9 +288,9 @@ class Cetak extends CI_Controller
         $this->pdf->SetFont('Arial','B',10);
         $this->pdf->Cell(8,7,"No",1,0,'C');
         $this->pdf->Cell(35,7,"Tgl Rekam",1,0);
-        $this->pdf->Cell(70,7,"No RM",1,0);
-        $this->pdf->Cell(25,7,"Klinik",1,0);
-        $this->pdf->Cell(0,7,"Dokter",1,1);
+        $this->pdf->Cell(35,7,"No RM",1,0);
+        $this->pdf->Cell(45,7,"Klinik",1,0);
+        $this->pdf->Cell(45,7,"Dokter",1,1);
 
         $this->pdf->SetFont('Arial','',10);
         if ($rmr > 0) {
@@ -286,23 +298,32 @@ class Cetak extends CI_Controller
             foreach ($rekam_medis as $rekam){
                 $this->pdf->Cell(8,7,$no,1,0,'C');
                 $this->pdf->Cell(35,7,$rekam->tgl_rekam,1,0);
-                $this->pdf->Cell(70,7,$rekam->no_rm,1,0);
-                foreach ($klinik as $kl){
-                    if ($rekam->klinik_tujuan == $kl['id']) {
-                        $this->pdf->Cell(25,7,$kl['nama_klinik'],1,0);
-                    }
-                }
-                foreach ($dokter as $dr){
-                    if ($rekam->dokter_tujuan == $dr['id']) {
-                        $this->pdf->Cell(0,7,$dr['nama_dokter'],1,0);
-                    }
+                $this->pdf->Cell(35,7,$rekam->no_rm,1,0);
+                $this->pdf->Cell(45,7,$rekam->nama_klinik,1,0);
+                $this->pdf->Cell(45,7,$rekam->nama_dokter,1,0);
+                // foreach ($klinik as $kl){
+                //     $kli = $kl['nama_klinik'];
+                // }
+                // if ($rekam->poli_id == $kl['id']) {
+                //         $this->pdf->Cell(45,7,$kli,1,0);
+                //     }
+                // foreach ($dokter as $dr){
+                //     if ($rekam->dokter_tujuan == $dr['id']) {
+                //         $this->pdf->Cell(45,7,$dr['nama_dokter'],1,0);
+                //     }
+                // if($rekam->poli_id == $klinik['id'])
+                // {
+                //     $this->pdf->Cell(45,7,$klinik['nama_kelinik'],1,0);
+                // }
+                // // $this->pdf->Cell(45,7,($rekam->poli_id == $dokter['nama_kelinik'])? 'selected' : '',1,0);
+                // $this->pdf->Cell(45,7,($rekam->dokter_id == $dokter['nama_dokter'])? 'selected' : '',1,0);
                 }
                 $no++;
-            }
+            // }
         }else{
             $this->pdf->Cell(0,7,"TIDAK ADA REKAMAN",1,0,'C');
         }
-        $this->pdf->Output( 'Riwayat_'.$no_pasien.'.pdf' , 'I' );
+        $this->pdf->Output( 'Riwayat_'.$no_ktp_pasien.'.pdf' , 'I' );
     }
 
     function cetak_rujuk($id_rujuk = null){
@@ -320,11 +341,11 @@ class Cetak extends CI_Controller
             $this->pdf->Cell(0,7,'Surat Rujukan',0,1,'C');
             $this->pdf->Ln();
             $rujuk = $this->db->get_where('rujuk_external', ['id_rujuk' => $id_rujuk])->row();
-            $dokter_perujuk = $this->db->get_where('dokter', ['id' => $rujuk->dokter_perujuk])->row();
+            $dokter_perujuk = $this->db->get_where('dokter', ['dokter_id' => $rujuk->dokter_id])->row();
             $no_rm = $this->db->get_where('rekam_medis', ['no_rm' => $rujuk->no_rm])->row();
             $resep = $this->db->get_where('resep_obat', ['no_rm' => $rujuk->no_rm])->result();
             $pemeriksaan = $this->db->get_where('pemeriksaan', ['no_rm' => $rujuk->no_rm])->row();
-            $pasien = $this->db->get_where('pasien', ['no_pasien' => $no_rm->no_pasien])->row();
+            $pasien = $this->db->get_where('pasien', ['no_ktp_pasien' => $no_rm->no_ktp_pasien])->row();
             if (!$rujuk) {
                     redirect('rujukan');
             }

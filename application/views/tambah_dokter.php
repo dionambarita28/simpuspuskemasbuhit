@@ -27,7 +27,7 @@
                                     <label class="col-form-label">Klinik Posisi:</label>
                                     <select class="form-control inp" id="level" name="klinik">
                                         <?php foreach($list_klinik as $klinik) : ?>
-                                            <option value="<?= $klinik['id'];?>"><?= $klinik['nama_klinik'];?></option>
+                                            <option value="<?= $klinik['poli_id'];?>"><?= $klinik['nama_klinik'];?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>

@@ -23,10 +23,10 @@ class Rujukan extends CI_Controller {
 		$data['klinik_list'] = $this->puskes->list_poli();
 		$data['list_dokter'] = $this->puskes->list_dokter();
 		$dokter = $this->db->get_where('dokter', ['username' => $this->session->userdata('username')])->row_array();
-		$data['rujuk_internal'] = $this->db->get_where('rujuk_internal', ['klinik_rujuk' => $dokter['klinik']])->result_array();
-		$data['rujuk_external'] = $this->db->get_where('rujuk_external', ['dokter_perujuk' => $dokter['id']])->result_array();
+		$data['rujuk_internal'] = $this->db->get_where('rujuk_internal', ['klinik_rujuk' => $dokter['poli_id']])->result_array();
+		$data['rujuk_external'] = $this->db->get_where('rujuk_external', ['dokter_id' => $dokter['dokter_id']])->result_array();
 		$data['pasien'] = $this->puskes->list_pasien();
-		$data['rujuk_internalr'] = $this->db->get_where('rujuk_internal', ['dokter_rujuk' => $dokter['id']])->result_array();
+		$data['rujuk_internalr'] = $this->db->get_where('rujuk_internal', ['dokter_rujuk' => $dokter['dokter_id']])->result_array();
 		$this->load->view('inc/header',$data);
 		$this->load->view('list_rujukan',$data);
 		$this->load->view('inc/footer');
@@ -50,7 +50,7 @@ class Rujukan extends CI_Controller {
 		$no_rm = $this->db->get_where('rujuk_internal', ['id_rujuk' => $id_rujuk])->row()->no_rm;
 		$data['rekam_medis'] = $this->db->get_where('rekam_medis', ['no_rm' => $no_rm])->row();
 		$data['rujuk_internal'] = $this->db->get_where('rujuk_internal', ['id_rujuk' => $id_rujuk])->row();
-		$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row();
+		$data['pemeriksaan'] = $this->db->get_where('pemeriksaan', ['no_rm' => $no_rm])->row_array();
 		if (!$data['rujuk_internal'] || $data['rujuk_internal']->status == 1) {
 			redirect('rujukan');
 		}
@@ -157,7 +157,7 @@ class Rujukan extends CI_Controller {
 		if (!$id) {
 			redirect('rujukan');
 		}
-		$this->db->delete('rujuk_internal', ['id' => $id]);
+		$this->db->delete('rujuk_internal', ['id_rujuk' => $id]);
 		$this->session->set_flashdata('message2', 
 			'<div class="alert alert-success" role="alert">Rujuk Internal berhasil dihapus</div>'
 		);
@@ -167,7 +167,7 @@ class Rujukan extends CI_Controller {
 		if (!$id) {
 			redirect('rujukan');
 		}
-		$this->db->delete('rujuk_external', ['id' => $id]);
+		$this->db->delete('rujuk_external', ['id_rujuk' => $id]);
 		$this->session->set_flashdata('message3', 
 			'<div class="alert alert-success" role="alert">Rujuk Internal berhasil dihapus</div>'
 		);

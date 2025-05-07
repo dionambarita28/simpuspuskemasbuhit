@@ -44,8 +44,8 @@
                                         <td><?= $i; ?></td>
                                         <td><strong><?= $list_k['kategori_obat']; ?></strong></td>
                                         <td>    
-                                            <button class="btn btn-success btn-xs edit-kategori" data-target="#modal-edit" data-toggle="modal" data-id="<?=$list_k['id']; ?>" data-kategori="<?=$list_k['kategori_obat']; ?>"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="kategori_obat/delete/<?=$list_k['id']; ?>"><i class="fa fa-trash"></i></button>
+                                            <button class="btn btn-success btn-xs edit-kategori" data-target="#modal-edit" data-toggle="modal" data-id="<?=$list_k['id_kategori_obat']; ?>" data-kategori="<?=$list_k['kategori_obat']; ?>"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="kategori_obat/delete/<?=$list_k['id_kategori_obat']; ?>"><i class="fa fa-trash"></i></button>
                                         </td>
                                         </tr>
                                         <?php $i++ ;?>
@@ -98,7 +98,7 @@
                     <button class="btn btn-default" data-dismiss="modal">Tidak</button>
                     <button class="btn btn-success" type="submit"><i class="fa fa-edit"></i> Ubah</button>
             </div>
-            <input name="id" type="hidden" class="form-control" value="" id="id_kategori">
+            <input name="id_kategori_obat" type="hidden" class="form-control" value="" id="id_kategori">
             </form>
         </div>
     </div>

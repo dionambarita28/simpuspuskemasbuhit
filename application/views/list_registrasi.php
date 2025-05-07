@@ -25,7 +25,7 @@
                             <thead class="bg-secondary">
                                 <tr class="text-uppercase text-sm text-white">
                                     <th scope="col" class="text-center">No Daftar</th>
-                                    <th scope="col">No Pasien</th>
+                                    <th scope="col">No KTP Pasien</th>
                                     <th scope="col">Nama Pasien</th>
                                     <th scope="col">Tgl Berobat</th>
                                     <th scope="col">Jenis</th>
@@ -37,14 +37,14 @@
                                     <?php foreach($list_registrasi2 as $registrasi2) : ?>
                                     <tr>
                                       <td scope="row" class="text-center"><strong><?= $registrasi2['no_pendaftaran']; ?></strong></td>
-                                      <td><?= $registrasi2['no_pasien']; ?></td>
+                                      <td><?= $registrasi2['no_ktp_pasien']; ?></td>
                                       <td><?= $registrasi2['nama_pasien']; ?></td>
                                       <td><?= $registrasi2['tgl_berobat']; ?></td>
                                       <td><?= $registrasi2['jenis_pasien']; ?></td>
                                       <td>Rp. <?= number_format($registrasi2['biaya']); ?></td>
                                         <td class="text-center">
                                             <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="pasien/delete_register/<?=$registrasi2['id']; ?>"><i class="fa fa-trash"></i></button>
-                                            <a href="<?= base_url('rekam_medis/rekam/').$registrasi2['no_pasien'];?>" class="btn btn-warning btn-xs">Rekam</a>
+                                            <a href="<?= base_url('rekam_medis/rekam/').$registrasi2['no_ktp_pasien'];?>" class="btn btn-warning btn-xs">Rekam</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -69,7 +69,7 @@
                             <thead>
                                 <tr class="text-uppercase text-sm">
                                     <th scope="col" class="text-center">No Daftar</th>
-                                    <th scope="col">No Pasien</th>
+                                    <th scope="col">No KTP Pasien</th>
                                     <th scope="col">Nama Pasien</th>
                                     <th scope="col">Tgl Berobat</th>
                                     <th scope="col">Jenis</th>
@@ -81,14 +81,14 @@
                                     <?php foreach($list_registrasi as $registrasi) : ?>
                                     <tr>
                                       <td scope="row" class="text-center"><strong><?= $registrasi['no_pendaftaran']; ?></strong></td>
-                                      <td><?= $registrasi['no_pasien']; ?></td>
+                                      <td><?= $registrasi['no_ktp_pasien']; ?></td>
                                       <td><?= $registrasi['nama_pasien']; ?></td>
                                       <td><?= $registrasi['tgl_berobat']; ?></td>
                                       <td><?= $registrasi['jenis_pasien']; ?></td>
                                       <td>Rp. <?= number_format($registrasi['biaya']); ?></td>
                                         <td class="text-center">
                                             <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="pasien/delete_register/<?=$registrasi['id']; ?>"><i class="fa fa-trash"></i></button>
-                                            <a href="<?= base_url('rekam_medis/rekam/').$registrasi['no_pasien'];?>" class="btn btn-warning btn-xs">Rekam</a>
+                                            <a href="<?= base_url('rekam_medis/rekam/').$registrasi['no_ktp_pasien'];?>" class="btn btn-warning btn-xs">Rekam</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

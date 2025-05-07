@@ -7,11 +7,11 @@
                     <div class="col-md-6 clearfix">
                         <input type="text" id="searchbox" class="pull-left form-search col-8" placeholder="Pencarian.." value=""> 
                     </div>
-                    <div class="clearfix col-md-6">
+                    <!-- <div class="clearfix col-md-6">
                         <div class="pull-right">
                             <a href="" class="btn btn-warning"><i class="fa fa-file-text"></i> Laporan Resep</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

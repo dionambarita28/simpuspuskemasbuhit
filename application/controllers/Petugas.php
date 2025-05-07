@@ -126,7 +126,7 @@ class Petugas extends CI_Controller {
 
 			$data = [
 				'nama_dokter' => $this->input->post('nama_dokter', true),
-				'klinik' => $this->input->post('klinik', true),
+				'poli_id' => $this->input->post('klinik', true),
 				'username' => $this->input->post('username',true)
 			];
 
@@ -200,9 +200,9 @@ class Petugas extends CI_Controller {
 			
 			$data = [
 				'nama_dokter' => $this->input->post('nama_dokter', true),
-				'klinik' => $this->input->post('klinik',true)
+				'poli_id' => $this->input->post('klinik',true)
 			];
-			$this->db->where('id', $id);
+			$this->db->where('dokter_id', $id);
 			$this->db->update('dokter', $data);
 			$this->session->set_flashdata('message', 
 				'<div class="alert alert-success" role="alert">Dokter berhasil diubah</div>'
@@ -218,7 +218,7 @@ class Petugas extends CI_Controller {
 		redirect('petugas');
 	}
 	function delete_dokter($id){
-		$this->db->delete('dokter', ['id' => $id]);
+		$this->db->delete('dokter', ['dokter_id' => $id]);
 		$this->session->set_flashdata('message', 
 			'<div class="alert alert-success" role="alert">Dokter berhasil dihapus</div>'
 		);

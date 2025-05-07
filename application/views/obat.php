@@ -30,7 +30,7 @@
                                       <td><?= $obat['nama_obat']; ?></td>
                                       <td class="text-right">
                                         <?php foreach($list_kategori as $list_k) : ?>
-                                        <?php if ($obat['kategori'] == $list_k['id']) {
+                                        <?php if ($obat['id_kategori_obat'] == $list_k['id_kategori_obat']) {
                                             echo $list_k['kategori_obat'];
                                         }?>
                                         <?php endforeach ?>
@@ -39,7 +39,7 @@
                                       <td class="text-right">
                                           
                                         <?php foreach($list_satuan_obat as $list_s) : ?>
-                                        <?php if ($obat['satuan'] == $list_s['id']) {
+                                        <?php if ($obat['id_satuan'] == $list_s['id_satuan']) {
                                             echo $list_s['nama_satuan'];
                                         }?>
                                         <?php endforeach ?>
@@ -51,8 +51,8 @@
                                       <td><?= $obat['expired']; ?></td>
                                       <td><?= substr($obat['keterangan'],0,20 ); ?>..</td>
                                         <td>    
-                                            <a href="<?=base_url('obat/update_obat/').$obat['id'];?>" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>
-                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="obat/delete/<?=$obat['id']; ?>"><i class="fa fa-trash"></i></button>
+                                            <a href="<?=base_url('obat/update_obat/').$obat['id_obat'];?>" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>
+                                            <button class="btn btn-danger btn-xs hapus-button" data-target="#hapus" data-toggle="modal" data-url="obat/delete/<?=$obat['id_obat']; ?>"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

@@ -49,7 +49,7 @@
                                       </div>
                                         <input type="hidden" value="" id="userid" name="id_obat">
                                         <input type="hidden" value="<?=$rekam_medis->no_rm;?>" id="no_rm" name="no_rm">
-                                        <input type="hidden" value="<?=$rekam_medis->dokter_tujuan;?>" id="no_rm" name="dokter_id">
+                                        <input type="hidden" value="<?=$rekam_medis->dokter_id;?>" id="no_rm" name="dokter_id">
                                     </div>
                                     
                                     <div class="form-group">
@@ -133,7 +133,7 @@
                       <td><?= $obat['nama_obat']; ?></td>
                       <td>
                         <?php foreach($list_kategori as $list_k) : ?>
-                        <?php if ($obat['kategori'] == $list_k['id']) {
+                        <?php if ($obat['id_kategori_obat'] == $list_k['id_kategori_obat']) {
                             echo $list_k['kategori_obat'];
                         }?>
                         <?php endforeach ?>
@@ -142,14 +142,14 @@
                       <td>
                           
                         <?php foreach($list_satuan_obat as $list_s) : ?>
-                        <?php if ($obat['satuan'] == $list_s['id']) {
+                        <?php if ($obat['id_satuan'] == $list_s['id_satuan']) {
                             echo $list_s['nama_satuan'];
                         }?>
                         <?php endforeach ?>
 
                       </td>
                         <td>
-                            <button class="btn btn-success btn-xs" data-nama="<?=$obat['nama_obat']; ?>" data-id="<?=$obat['id']; ?>" id="pilih-obat"><i class="fa fa-check"></i>&nbsp; Pilih</button>
+                            <button class="btn btn-success btn-xs" data-nama="<?=$obat['nama_obat']; ?>" data-id="<?=$obat['id_obat']; ?>" id="pilih-obat"><i class="fa fa-check"></i>&nbsp; Pilih</button>
                         </td>
                     </tr>
                     <?php endforeach ?>

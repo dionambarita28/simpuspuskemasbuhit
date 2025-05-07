@@ -11,7 +11,7 @@
                             <thead class="bg-secondary">
                                 <tr class="text-white text-uppercase text-sm">
                                     <th>No Rm</th>
-                                    <th>No Pasien</th>
+                                    <th>No KTP Pasien</th>
                                     <th>Tgl Rekam</th>
                                     <th>Nama Pasien</th>
                                     <th>Klinik</th>
@@ -24,18 +24,18 @@
                                     <?php foreach($rekam_list as $rekam) : ?>
                                     <tr>
                                       <td><?= $rekam['no_rm']; ?></td>
-                                      <td><?= $rekam['no_pasien']; ?></td>
+                                      <td><?= $rekam['no_ktp_pasien']; ?></td>
                                       <td><?= $rekam['tgl_rekam']; ?></td>
                                       <td><?= $rekam['nama_pasien']; ?></td>
                                       <td>
                                         <?php foreach($poli_list as $list_p) : ?>
-                                        <?php if ($rekam['klinik_tujuan'] == $list_p['id']) {
+                                        <?php if ($rekam['poli_id'] == $list_p['poli_id']) {
                                             echo $list_p['nama_klinik'];
                                         } ?>
                                         <?php endforeach ?>
                                       </td>
                                       <td><?php foreach($list_dokter as $list_d) : ?>
-                                        <?php if ($rekam['dokter_tujuan'] == $list_d['id']) {
+                                        <?php if ($rekam['dokter_id'] == $list_d['dokter_id']) {
                                             echo $list_d['nama_dokter'];
                                         } ?>
                                         <?php endforeach ?></td>
@@ -46,7 +46,7 @@
                                         } ?></td>
                                         <td class="text-center">
                                             <a href="<?= base_url('cetak/info_rm/'.$rekam['id']);?>" class="btn btn-info btn-xs"><i class="fa fa-hospital-o"></i></a>
-                                            <a href="" class="btn btn-success btn-xs<?php if($user['level'] != 2){echo " disabled";}?>"><i class="fa fa-pencil"></i></a>
+                                            <!-- <a href="" class="btn btn-success btn-xs<?php if($user['level'] != 2){echo " disabled";}?>"><i class="fa fa-pencil"></i></a> -->
                                             <button data-toggle="modal" data-target="<?php if($user['level'] == 2){echo "#hapus";}?>" class="hapus-button btn btn-danger btn-xs<?php if($user['level'] != 2){echo " disabled";}?>" data-url="rekam_medis/delete_rm/<?=$rekam['id']; ?>"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
