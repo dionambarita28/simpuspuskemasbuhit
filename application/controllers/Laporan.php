@@ -37,9 +37,9 @@ class Laporan extends CI_Controller {
                         redirect('pasien');
                 }
                 $pdf->SetFont('Arial','B',12);
-                $pdf->Cell(108,10,'UPT. PUSKESMAS KACANG PEDANG',"L R T",1,"C");
+                $pdf->Cell(108,10,'UPT. PUSKESMAS BUHIT',"L R T",1,"C");
                 $pdf->SetFont('Arial','',10);
-                $pdf->Cell(108,7,'Jl. Usman Ambon PangkalPinang',"L R",1,"C");
+                $pdf->Cell(108,7,'Jl. SIMANINDO KM 2 SAMOSIR',"L R",1,"C");
                 $pdf->SetFont('Arial','B',10);
                 $pdf->SetFillColor(238, 238, 238);
                 $pdf->Cell(108,7,'KARTU PASIEN',"L R T",1,"C",TRUE);
@@ -73,9 +73,9 @@ class Laporan extends CI_Controller {
                         redirect('pemeriksaan');
                 }
                 $pdf->SetFont('Arial','B',12);
-                $pdf->Cell(140,10,'UPT. PUSKESMAS KACANG PEDANG',"L R T",1,"C");
+                $pdf->Cell(140,10,'UPT. PUSKESMAS BUHIT',"L R T",1,"C");
                 $pdf->SetFont('Arial','',10);
-                $pdf->Cell(140,7,'Jl. Usman Ambon PangkalPinang',"L R",1,"C");
+                $pdf->Cell(140,7,'Jl. SIMANINDO KM 2 SAMOSIR',"L R",1,"C");
                 $pdf->SetFont('Arial','B',10);
                 $pdf->SetFillColor(238, 238, 238);
                 $pdf->Cell(140,7,'RESEP OBAT',"L R T",1,"C",TRUE);

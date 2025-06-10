@@ -86,7 +86,7 @@ background:#fafafa;
     height: 100vh;
     width: 230px;
     overflow: hidden;
-    background: #303641;
+    background: #f4f6f9;
     box-shadow: 2px 0 32px rgba(0, 0, 0, 0.05);
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
@@ -111,7 +111,7 @@ background:#fafafa;
 }
 
 .slimScrollBar {
-    background: #fff!important;
+    background: #595757!important;
     opacity: 0.1!important;
 }
 .bg-green {
@@ -133,7 +133,7 @@ background:#fafafa;
 }
 .sidebar-header {
     padding: 19px 32px 15px;
-    background: #56c596;
+    background: #bcdcfd;
     border-bottom: 1px solid #343e50;
 }
 .sbar_collapsed .sidebar-menu .logo {
@@ -166,7 +166,7 @@ background:#fafafa;
 }
 
 .metismenu li a i {
-    color: #7be495;
+    color: #000000;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
@@ -209,7 +209,7 @@ background:#fafafa;
 .metismenu >li:hover>a,
 .metismenu >li.active>a {
     color: #fff;
-    background: #343942;
+    background: #bcdcfd;
 }
 
 .metismenu li:hover>a,
@@ -397,7 +397,7 @@ background:#fafafa;
 
 .header-area {
     padding: 15px 30px;
-    background: #fff;
+    background: #bcdcfd;
     border-bottom: 1px solid #d8e3e7;
 }
 
@@ -410,7 +410,7 @@ background:#fafafa;
     display: block;
     width: 22px;
     height: 2px;
-    background: #b3aaaa;
+    background: #000000;
     margin: 4px 0;
     border-radius: 15px;
     -webkit-transition: all 0.3s ease 0s;
@@ -500,7 +500,7 @@ background:#fafafa;
 
 .notification-area li>i {
     font-size: 26px;
-    color: #bdbcbc;
+    color: #000000;
     vertical-align: middle;
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
     -webkit-transition: color 0.3s ease 0s;
@@ -722,7 +722,7 @@ ul.breadcrumbs {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     background: -webkit-linear-gradient(left, #56c596 0%, #7be495 100%);
-    background: linear-gradient(to right, #56c596 0%, #7be495 100%);
+    background: linear-gradient(to right, #3f43bc 0%, #bcdcfd 100%);
     padding: 17px 38px;
     position: relative;
 }
@@ -1313,22 +1313,22 @@ table.dbkit-table tr td {
 }
 
 .sbg1 {
-    background: -webkit-linear-gradient(291deg, rgb(77, 77, 253) 0%, rgb(108, 143, 234) 100%);
-    background: linear-gradient(159deg, rgb(77, 77, 253) 0%, rgb(108, 143, 234) 100%);
+    background: -webkit-linear-gradient(291deg, rgb(77, 77, 253) 0%, rgb(181, 185, 197) 100%);
+    background: linear-gradient(159deg, rgb(77, 77, 253) 0%, rgb(164, 168, 178) 100%);
 }
 
 .sbg2 {
-    background: -webkit-linear-gradient(291deg, rgb(5, 176, 133) 0%, rgb(27, 212, 166) 59%);
-    background: linear-gradient(159deg, rgb(5, 176, 133) 0%, rgb(27, 212, 166) 59%);
+    background: -webkit-linear-gradient(291deg, rgb(5, 176, 133) 0%, rgb(23, 110, 56) 59%);
+    background: linear-gradient(159deg, rgb(5, 176, 133) 0%, rgb(46, 141, 117) 59%);
 }
 
 .sbg3 {
-    background: -webkit-linear-gradient(298deg, rgb(216, 88, 79) 0%, rgb(243, 140, 140) 100%);
-    background: linear-gradient(152deg, rgb(216, 88, 79) 0%, rgb(243, 140, 140) 100%);
+    background: -webkit-linear-gradient(298deg, rgb(216, 88, 79) 0%, rgb(190, 18, 18) 100%);
+    background: linear-gradient(152deg, rgb(216, 88, 79) 0%, rgb(118, 99, 99) 100%);
 }
 
 .sbg4 {
-    background: -webkit-linear-gradient(59deg, rgb(254, 208, 63) 0%, rgb(230, 190, 63) 110%);
+    background: -webkit-linear-gradient(59deg, rgb(254, 208, 63) 0%, rgb(62, 53, 26) 110%);
     background: linear-gradient(31deg, rgb(254, 208, 63) 0%, rgb(230, 190, 63) 110%);
 }
 
@@ -2311,7 +2311,11 @@ table.dataTable thead td {
 /*-------------------- 23. Login ------------------- */
 
 .login-area {
-    background: #F3F8FB;
+    background-image: url('../images/bg/bg-login.jpg'); /* sesuaikan path relatif */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 .login-box {
@@ -2319,20 +2323,26 @@ table.dataTable thead td {
     display: -ms-flexbox;
     display: flex;
     min-height: 100vh;
+    background: url('background.jpg') no-repeat center center fixed; /* Opsional */
+    background-size: cover; /* Opsional */
 }
 
 .login-box form {
     margin: auto;
-    width: 450px;
+    width: 350px;
     max-width: 100%;
-    background: #fff;
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.8); /* Putih transparan */
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Tambahan bayangan untuk efek depth */
+    backdrop-filter: blur(0.5px); /* Opsional untuk efek kaca */
 }
 
 .login-form-head {
     text-align: center;
-    background: #56c596;
+    background: #aea9f7e6; /* Warna hijau transparan */
     padding: 50px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .login-form-head h4 {
@@ -2348,6 +2358,7 @@ table.dataTable thead td {
     font-size: 14px;
     line-height: 22px;
 }
+
 
 .login-form-body {
     padding: 50px;

@@ -3,7 +3,7 @@
 <!-- footer area start-->
 <footer>
     <div class="footer-area">
-        Copyright &copy; By SIMPUS
+        Copyright &copy; By Dionisius Ambarita
     </div>
 </footer>
 <!-- footer area end-->

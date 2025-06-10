@@ -154,7 +154,7 @@
                         <div class="breadcrumbs-area clearfix">
                             <h4 class="page-title pull-left"><?=$title;?></h4>
                             <ul class="breadcrumbs pull-left">
-                                <li><a href="/">Home</a></li>
+                                <li><a href="<?= base_url('dashboard'); ?>">Home</a></li>
                                 <li><span><?=$title;?></span></li>
                             </ul>
                         </div>

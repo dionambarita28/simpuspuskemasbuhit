@@ -100,7 +100,7 @@ $config['logo'] = 'assets/images/icon/logo1.png';
 |
 | Main page's Title
 */
-$config['head_title'] = 'UPT. PUSKESMAS KACANG PEDANG';
+$config['head_title'] = 'UPT. PUSKESMAS BUHIT';
 
 /*
 | -------------------------------------------------------------------
@@ -109,8 +109,8 @@ $config['head_title'] = 'UPT. PUSKESMAS KACANG PEDANG';
 |
 | Main page's Subitle
 */
-$config['head_subtitle'] = 'Jl. Usman Ambon Pangkalpinang';
-$config['head_subtitle2'] = 'Telp (0717)424963 Email: kacangpedangkapeda@gmail.com';
+$config['head_subtitle'] = 'Jl. SIMANINDO KM 2 SAMOSIR';
+$config['head_subtitle2'] = 'Telp (0717)424963 Email: puskesmasbuhitpangururan@gmail.com';
 
 /*
 | -------------------------------------------------------------------

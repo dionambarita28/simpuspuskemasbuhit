@@ -4,13 +4,13 @@
 *
 * Version: 1.0.0
 *
-* Author: Pedro Ruiz Hidalgo
-*		  ruizhidalgopedro@gmail.com
-*         @pedroruizhidalg
-*
+* Author: Dionisius Ambarita
+*		  dionambarita0@gmail.com
+*         @dionambaritaa
+
 * Location: application/third_party/fpdf/libraries/Pdf.php
 *
-* Created:  2018-02-27
+* Created:  2024-02-27
 *
 * Description:  This manages FPDF
 *

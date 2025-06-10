@@ -3,8 +3,8 @@
 * FPDF                                                                         *
 *                                                                              *
 * Version: 1.81                                                                *
-* Date:    2015-12-20                                                          *
-* Author:  Olivier PLATHEY                                                     *
+* Date:    2024-2-20                                                          *
+* Author:  Dionisius Ambarita                                                  *
 *******************************************************************************/
 
 define('FPDF_VERSION','1.81');

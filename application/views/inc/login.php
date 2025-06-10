@@ -18,7 +18,7 @@
     <!-- others css -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/typography.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/default-css.css">
-    <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/styles.css">
+    <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/responsive.css">
     <!-- modernizr css -->
     <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -42,6 +42,8 @@
                         <div class="mx-auto">
                             <img src="<?= base_url(); ?>/assets/images/icon/logo.png">
                         </div>
+                        <h5> UPT PUSKESMAS BUHIT </h5>
+                        <h6>JL.SIMANINDO KM 2 SAMOSIR</h6><br>
                         <p>Silahkan masukan Username & Password anda</p>
                     </div>
                     <div class="login-form-body">
